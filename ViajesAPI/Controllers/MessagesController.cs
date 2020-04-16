@@ -67,7 +67,11 @@ namespace ViajesAPI.Controllers
                 }
             }
         }
-
+        /// <summary>
+        /// Agrega un mensaje. si el usuario no existe en la Base de datos lo agrega
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AddMeesage([FromBody] Message message)
         {
