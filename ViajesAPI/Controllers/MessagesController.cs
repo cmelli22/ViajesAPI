@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using ViajesAPI.Models.Entities;
 using ViajesAPI.Repositories.Interfaces;
 using ViajesAPI.Services.Interfaces;
-using ViajesAPI.ViewModels;
-using ViajesAPI.ViewModels.BodyModels;
 
 namespace ViajesAPI.Controllers
 {
@@ -40,10 +34,10 @@ namespace ViajesAPI.Controllers
             {
                 return Ok(response.dataList);
             }
-           
+
         }
         /// <summary>
-        /// 
+        /// Busca un Mensaje por id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -57,7 +51,7 @@ namespace ViajesAPI.Controllers
             }
             else
             {
-                if(response.data != null)
+                if (response.data != null)
                 {
                     return Ok(response.data);
                 }
@@ -76,7 +70,7 @@ namespace ViajesAPI.Controllers
         public async Task<IActionResult> AddMeesage([FromBody] Message message)
         {
 
-          
+
             var response = await _messageService.AddMessage(message);
             if (!response.status)
             {
@@ -84,7 +78,7 @@ namespace ViajesAPI.Controllers
             }
             else
             {
-                return Ok(response.data);
+                return Ok(response.message);
             }
 
         }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using ViajesAPI.Models.Entities;
-using ViajesAPI.Services.Implementations;
 using ViajesAPI.Services.Interfaces;
 
 namespace ViajesAPI.Controllers
@@ -36,7 +31,7 @@ namespace ViajesAPI.Controllers
             {
                 return Ok(response.dataList);
             }
-          
+
         }
         /// <summary>
         /// Busca Usuario en la base de datos por id
@@ -55,7 +50,7 @@ namespace ViajesAPI.Controllers
             {
                 return Ok(response.data);
             }
-  
+
 
         }
         /// <summary>
@@ -81,7 +76,7 @@ namespace ViajesAPI.Controllers
                 {
                     return Ok(response.data);
                 }
-                
+
             }
 
         }
@@ -94,7 +89,7 @@ namespace ViajesAPI.Controllers
         public async Task<IActionResult> DeleteUser(int id)
         {
             var user = await _userService.GetById(id);
-            if(user.data == null)
+            if (user.data == null)
             {
                 return NotFound("No se encontro el usuario que quiere eliminar");
             }

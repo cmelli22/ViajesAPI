@@ -1,16 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using ViajesAPI.Models.Contexts;
-using ViajesAPI.Models.Entities;
 using ViajesAPI.Repositories.Interfaces;
 
 namespace ViajesAPI.Repositories.Implementations
 {
-    public abstract class GenericRepository<TEntity>: IGenericRepository<TEntity> where TEntity:class
-    
+    public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+
     {
         private readonly Context _context;
         private DbSet<TEntity> entities;

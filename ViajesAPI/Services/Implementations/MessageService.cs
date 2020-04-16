@@ -9,7 +9,6 @@ using ViajesAPI.Repositories.Interfaces;
 using ViajesAPI.Services.Interfaces;
 using ViajesAPI.UnitOfWorks;
 using ViajesAPI.ViewModels;
-using ViajesAPI.ViewModels.BodyModels;
 
 namespace ViajesAPI.Services.Implementations
 {
@@ -20,7 +19,7 @@ namespace ViajesAPI.Services.Implementations
         private readonly IMapper _mapper;
         private readonly IUnitOfWorks _unitOfWorks;
 
-        public MessageService(IMessageRepository messageRepository, 
+        public MessageService(IMessageRepository messageRepository,
             IMapper mapper, IUserService userService, IUnitOfWorks unitOfWorks)
         {
             _messageRepository = messageRepository;
@@ -62,30 +61,30 @@ namespace ViajesAPI.Services.Implementations
         public async Task<BaseResponse<MessageViewModel>> AddMessage(Message message)
         {
             #region ExisteUsuario
-           
-            User UsuarioExistente= null;
+
+            User UsuarioExistente = null;
             var response = await _userService.GetAll();
             var users = response.dataList;
-            
+
             foreach (var u in users)
             {
                 if (u.email == message.user.email)
                 {
                     UsuarioExistente = u;
-                   
+
                 }
             }
             #endregion
             //var messageMap = _mapper.Map<BodyMessage, Message>(message);
             if (UsuarioExistente == null)
             {
-                
+
                 try
                 {
                     await _userService.Add(message.user);
-                    var usuarios =  await _userService.GetAll();
+                    var usuarios = await _userService.GetAll();
                     message.user = usuarios.dataList.Last();
-                   
+
                 }
                 catch (Exception ex)
                 {
@@ -96,7 +95,7 @@ namespace ViajesAPI.Services.Implementations
             {
                 message.user = UsuarioExistente;
             }
-            
+
             try
             {
                 var messageViewModel = _mapper.Map<Message, MessageViewModel>(message);
@@ -109,11 +108,11 @@ namespace ViajesAPI.Services.Implementations
                 return new BaseResponse<MessageViewModel>(ex.Message);
             }
 
-           
 
-        
-          
-          
+
+
+
+
         }
 
         public async Task<BaseResponse<MessageViewModel>> DeleteMessage(MessageViewModel message)

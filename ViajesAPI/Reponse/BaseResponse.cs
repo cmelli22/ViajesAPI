@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ViajesAPI.Reponse
 {
-    public class BaseResponse<TEntity> where TEntity: class
+    public class BaseResponse<TEntity> where TEntity : class
     {
         public bool status { get; set; }
         public string message { get; set; }
@@ -20,7 +17,7 @@ namespace ViajesAPI.Reponse
             data = null;
         }
 
-        public BaseResponse(IList<TEntity> dataList )
+        public BaseResponse(IList<TEntity> dataList)
         {
             status = true;
             this.message = "La opreacion se realizo con exito";

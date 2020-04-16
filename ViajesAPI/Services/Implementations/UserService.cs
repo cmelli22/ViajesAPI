@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using ViajesAPI.Models.Entities;
 using ViajesAPI.Reponse;
@@ -10,7 +8,7 @@ using ViajesAPI.UnitOfWorks;
 
 namespace ViajesAPI.Services.Implementations
 {
-    public class UserService: IUserService
+    public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
         private readonly IUnitOfWorks _uniOfWorks;
@@ -83,7 +81,7 @@ namespace ViajesAPI.Services.Implementations
 
             try
             {
-                 _userRepository.Delete(user);
+                _userRepository.Delete(user);
                 await _uniOfWorks.SaveChanges();
                 return new BaseResponse<User>(user);
             }
