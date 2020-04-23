@@ -12,6 +12,7 @@ using ViajesAPI.Repositories.Interfaces;
 using ViajesAPI.Services.Implementations;
 using ViajesAPI.Services.Interfaces;
 using ViajesAPI.UnitOfWorks;
+using Microsoft.OpenApi.Models;
 
 namespace ViajesAPI
 {
@@ -36,6 +37,10 @@ namespace ViajesAPI
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Viajes API", Version = "v1" });
+            });
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IUnitOfWorks, UnitOfWorks.UnitOfWorks>();
@@ -52,7 +57,13 @@ namespace ViajesAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+  
+            app.UseSwagger();
 
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Viajes API");
+            });
             app.UseHttpsRedirection();
 
             app.UseRouting();
