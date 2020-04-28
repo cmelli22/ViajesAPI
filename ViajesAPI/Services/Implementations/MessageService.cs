@@ -93,7 +93,7 @@ namespace ViajesAPI.Services.Implementations
             }
             else
             {
-                message.user = UsuarioExistente;
+                message.user = UsuarioExistente;    
             }
 
             try

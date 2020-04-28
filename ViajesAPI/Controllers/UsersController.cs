@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ViajesAPI.Models.Entities;
 using ViajesAPI.Services.Interfaces;
+using ViajesAPI.ViewModels;
 
 namespace ViajesAPI.Controllers
 {
@@ -10,10 +12,12 @@ namespace ViajesAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
         /// <summary>
         /// devuelve todos los usuarios con los mensjaes que cada uno mando
@@ -88,7 +92,7 @@ namespace ViajesAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            var user = await _userService.GetById(id);
+            var user = await _userService.GetById(id);  
             if (user.data == null)
             {
                 return NotFound("No se encontro el usuario que quiere eliminar");

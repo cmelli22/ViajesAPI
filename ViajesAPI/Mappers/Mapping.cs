@@ -10,6 +10,7 @@ namespace ViajesAPI.Mappers
         public Mapping()
         {
             CreateMap<Message, MessageViewModel>().ReverseMap();
+            CreateMap<User, UserViewModel>().ReverseMap();
             CreateMap<BodyMessage, Message>().ReverseMap();
         }
 

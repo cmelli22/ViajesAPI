@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ViajesAPI.ViewModels
 {
     public class UserViewModel
     {
+        public int id { get; set; }
         [Required]
         public string name { get; set; }
         [Required]

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ViajesAPI.Models.Entities;
 using ViajesAPI.Reponse;
+using ViajesAPI.ViewModels;
 
 namespace ViajesAPI.Services.Interfaces
 {

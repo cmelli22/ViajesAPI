@@ -1,10 +1,13 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ViajesAPI.Models.Entities;
 using ViajesAPI.Reponse;
 using ViajesAPI.Repositories.Interfaces;
 using ViajesAPI.Services.Interfaces;
 using ViajesAPI.UnitOfWorks;
+using ViajesAPI.ViewModels;
 
 namespace ViajesAPI.Services.Implementations
 {
@@ -12,11 +15,12 @@ namespace ViajesAPI.Services.Implementations
     {
         private readonly IUserRepository _userRepository;
         private readonly IUnitOfWorks _uniOfWorks;
-
-        public UserService(IUserRepository userRepository, IUnitOfWorks unitOfWorks)
+        private readonly IMapper _mapper;
+        public UserService(IUserRepository userRepository, IUnitOfWorks unitOfWorks, IMapper mapper)
         {
             _userRepository = userRepository;
             _uniOfWorks = unitOfWorks;
+            _mapper = mapper;
         }
         public async Task<BaseResponse<User>> GetAll()
         {

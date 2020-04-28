@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ViajesAPI.Models.Entities
 {
@@ -8,9 +9,9 @@ namespace ViajesAPI.Models.Entities
         [Required]
         public string message { get; set; }
         public bool readed { get; set; }
-        public string product { get; set; }
+        public Guid productId { get; set; }
+        public Product product { get; set; }
         public int userId { get; set; }
-
         public User user { get; set; }
     }
 }

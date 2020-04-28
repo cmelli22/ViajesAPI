@@ -3,40 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ViajesAPI.Models.Contexts;
 
 namespace ViajesAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20200428143234_Se agrego tabla products")]
+    partial class Seagregotablaproducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("ViajesAPI.Models.Entities.Category", b =>
-                {
-                    b.Property<int>("CategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CategoryId");
-
-                    b.ToTable("Category");
-                });
 
             modelBuilder.Entity("ViajesAPI.Models.Entities.Message", b =>
                 {
@@ -73,12 +56,6 @@ namespace ViajesAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Precio")
-                        .HasColumnType("float");
-
                     b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
 
@@ -86,8 +63,6 @@ namespace ViajesAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("productId");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("products");
                 });
@@ -132,15 +107,6 @@ namespace ViajesAPI.Migrations
                     b.HasOne("ViajesAPI.Models.Entities.User", "user")
                         .WithMany("messages")
                         .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ViajesAPI.Models.Entities.Product", b =>
-                {
-                    b.HasOne("ViajesAPI.Models.Entities.Category", "category")
-                        .WithMany("products")
-                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

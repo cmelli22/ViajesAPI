@@ -8,6 +8,7 @@ namespace ViajesAPI.Models.Contexts
         public DbSet<User> users { get; set; }
 
         public DbSet<Message> meesages { get; set; }
+        public DbSet<Product> products { get; set; }
 
         public Context(DbContextOptions<Context> options) : base(options)
         {
@@ -33,7 +34,15 @@ namespace ViajesAPI.Models.Contexts
             builder.Entity<Message>().HasKey(p => p.id);
             builder.Entity<Message>().Property(p => p.message).IsRequired();
             builder.Entity<Message>().Property(p => p.readed).IsRequired();
+    
 
+            builder.Entity<Product>().ToTable("products");
+            builder.Entity<Product>().Property(p => p.productId).IsRequired();
+            builder.Entity<Product>().HasKey(p => p.productId);
+            builder.Entity<Product>().Property(p => p.name);
+            builder.Entity<Product>().Property(p => p.description);
+            builder.Entity<Product>().Property(p => p.Precio).IsRequired();
+            builder.Entity<Product>().HasMany(p => p.messages).WithOne(p => p.product).HasForeignKey(p => p.productId);
 
 
 
