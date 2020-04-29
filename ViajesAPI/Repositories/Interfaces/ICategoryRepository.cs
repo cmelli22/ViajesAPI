@@ -6,7 +6,7 @@ using ViajesAPI.Models.Entities;
 
 namespace ViajesAPI.Repositories.Interfaces
 {
-    interface ICategoryRepository : IGenericRepository<Category>
+    interface ICategoryRepository : IGenericRepository<Category,int>
     {
     }
 }

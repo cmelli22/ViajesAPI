@@ -6,7 +6,9 @@ using ViajesAPI.Repositories.Interfaces;
 
 namespace ViajesAPI.Repositories.Implementations
 {
-    public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    public abstract class GenericRepository<TEntity ,T> : IGenericRepository<TEntity, T>
+        where TEntity : class
+        where T:struct
 
     {
         private readonly Context _context;
@@ -23,7 +25,7 @@ namespace ViajesAPI.Repositories.Implementations
             return await entities.ToListAsync();
         }
 
-        public virtual async Task<TEntity> GetById(int id)
+        public virtual async Task<TEntity> GetById(T id)
         {
             return await entities.FirstOrDefaultAsync();
         }

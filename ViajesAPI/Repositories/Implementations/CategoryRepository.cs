@@ -8,7 +8,7 @@ using ViajesAPI.Repositories.Interfaces;
 
 namespace ViajesAPI.Repositories.Implementations
 {
-    public class CategoryRepository: GenericRepository<Category> , ICategoryRepository
+    public class CategoryRepository: GenericRepository<Category,int> , ICategoryRepository
     {
         public CategoryRepository(Context context) : base(context) { }
     }

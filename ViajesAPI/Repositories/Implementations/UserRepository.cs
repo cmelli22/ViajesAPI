@@ -7,7 +7,7 @@ using ViajesAPI.Repositories.Interfaces;
 
 namespace ViajesAPI.Repositories.Implementations
 {
-    public class UserRepository : GenericRepository<User>, IUserRepository
+    public class UserRepository : GenericRepository<User,int>, IUserRepository
     {
 
         private readonly Context _context;

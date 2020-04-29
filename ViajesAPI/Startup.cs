@@ -46,6 +46,9 @@ namespace ViajesAPI
             services.AddScoped<IUnitOfWorks, UnitOfWorks.UnitOfWorks>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProdcutRepository, ProductRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddAutoMapper(typeof(Mapping));
 
         }

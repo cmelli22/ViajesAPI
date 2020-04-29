@@ -6,7 +6,7 @@ using ViajesAPI.Models.Entities;
 
 namespace ViajesAPI.Repositories.Interfaces
 {
-    public interface IProdcutRepository: IGenericRepository<Product>
+    public interface IProdcutRepository: IGenericRepository<Product,Guid>
     {
 
     }
