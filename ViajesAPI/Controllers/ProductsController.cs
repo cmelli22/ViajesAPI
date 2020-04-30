@@ -71,5 +71,27 @@ namespace ViajesAPI.Controllers
             }
 
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteProduct([FromBody] Product product)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                var response = await _productService.Delete(product);
+                if (!response.status)
+                {
+                    return NotFound(response.message);
+                }
+                else
+                {
+                    return Ok("El producto fue eliminado correctamente");
+                }
+            }
+
+        }
     }
 }

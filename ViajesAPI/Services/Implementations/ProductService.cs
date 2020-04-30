@@ -78,7 +78,25 @@ namespace ViajesAPI.Services.Implementations
         }
         public async Task<BaseResponse<Product>> Delete(Product product)
         {
-            return new BaseResponse<Product>("srasra");
+            var existeProducto = await this.GetById(product.productId);
+            if(existeProducto.data != null) 
+            {
+                try
+                {
+                    _productRepository.Delete(product);
+                    await _unitOfWork.SaveChanges();
+                    return new BaseResponse<Product>(product);
+                }
+                catch (Exception ex)
+                {
+                    return new BaseResponse<Product>(ex.Message);
+                }
+            }
+            else
+            {
+                return new BaseResponse<Product>(existeProducto.message);
+            }
+
         }
     }
 }
