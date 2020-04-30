@@ -11,7 +11,7 @@ namespace ViajesAPI.Services.Interfaces
     {
         Task<BaseResponse<Product>> GetAll();
         Task<BaseResponse<Product>> GetById(Guid id);
-        Task<BaseResponse<Product>> Add(Product user);
-        Task<BaseResponse<Product>> Delete(Product user);
+        Task<BaseResponse<Product>> Add(Product product);
+        Task<BaseResponse<Product>> Delete(Product product);
     }
 }

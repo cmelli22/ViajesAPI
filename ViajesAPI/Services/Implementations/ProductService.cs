@@ -6,16 +6,19 @@ using ViajesAPI.Models.Entities;
 using ViajesAPI.Reponse;
 using ViajesAPI.Repositories.Interfaces;
 using ViajesAPI.Services.Interfaces;
+using ViajesAPI.UnitOfWorks;
 
 namespace ViajesAPI.Services.Implementations
 {
     public class ProductService: IProductService
     {
         private readonly IProdcutRepository _productRepository;
+        private readonly IUnitOfWorks _unitOfWork;
 
-        public ProductService(IProdcutRepository productRepository)
+        public ProductService(IProdcutRepository productRepository, IUnitOfWorks unitOfWork)
         {
             _productRepository = productRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<BaseResponse<Product>> GetAll()
@@ -59,11 +62,21 @@ namespace ViajesAPI.Services.Implementations
                 return new BaseResponse<Product>(ex.Message);   
             }
         }
-        public async Task<BaseResponse<Product>> Add(Product user)
+        public async Task<BaseResponse<Product>> Add(Product product)
         {
-            return new BaseResponse<Product>("srasra");
+            try
+            {
+                await _productRepository.Add(product);
+                await _unitOfWork.SaveChanges();
+                return new BaseResponse<Product>(product);
+
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<Product>(ex.Message);
+            }
         }
-        public async Task<BaseResponse<Product>> Delete(Product user)
+        public async Task<BaseResponse<Product>> Delete(Product product)
         {
             return new BaseResponse<Product>("srasra");
         }

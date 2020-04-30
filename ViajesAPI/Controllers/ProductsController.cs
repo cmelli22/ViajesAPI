@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ViajesAPI.Models.Entities;
 using ViajesAPI.Services.Interfaces;
 
 namespace ViajesAPI.Controllers
@@ -46,6 +47,29 @@ namespace ViajesAPI.Controllers
             {
                 return Ok(response.data);
             }
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> PostProduct([FromBody] Product product)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                var response = await _productService.Add(product);
+                if (!response.status)
+                {
+                    return NotFound(response.message);
+                }
+                else
+                {
+                    return Ok(response);
+                }
+
+            }
+
         }
     }
 }
